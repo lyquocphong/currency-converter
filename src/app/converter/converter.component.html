@@ -3,8 +3,19 @@
 
   <input type="number" placeholder="amount" [(ngModel)]="amount" />
 
-  <label>From: </label> <span>{{from}}</span>
-  <label>To: </label> <span>{{to}}</span> <br>
+  <label>From: </label>
+  <select [(ngModel)]="from" (change)="loadRates()">
+    <option *ngFor="let c of getAllCurrencies()" [value]="c">{{c}}</option>
+  </select>
 
-  <b [style.color]="amount < 0 ? 'red' : ''">{{amount.toFixed(2)}} {{from}} = {{convert()}} {{to}}</b>
+  <label>To: </label>
+  <select [(ngModel)]="to">
+    <option *ngFor="let c of getAllCurrencies()" [value]="c">{{c}}</option>
+  </select>
+
+  <div>
+    <b [style.color]="amount < 0 ? 'red' : ''">
+      {{amount.toFixed(2)}} {{from}} = {{convert()}} {{to}}
+    </b>
+  </div>
 </div>
